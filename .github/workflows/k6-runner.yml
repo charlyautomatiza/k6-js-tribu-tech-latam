@@ -1,0 +1,17 @@
+name: Main Workflow
+on: [push]
+jobs:
+  build:
+    name: Run k6 test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - uses: grafana/setup-k6-action@v1
+        with:
+          browser: true
+      - uses: grafana/run-k6-action@v1
+        with:
+          path: |
+            ./src/thresholds.js
+            ./src/browser.js
